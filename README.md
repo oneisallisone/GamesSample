@@ -1,6 +1,6 @@
 Here's an enriched version of the README for the Sprunki game landing page project, focusing on the structure you've outlined:
 
-```markdown
+
 # Sprunki Game Landing Page
 
 Welcome to the **Sprunki Game Landing Page** project, an interactive HTML page designed to introduce players to the world of Sprunki games. This project is built to be lightweight, with no external dependencies, ensuring a quick and seamless user experience.
