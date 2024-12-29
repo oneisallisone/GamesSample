@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appel - A Challenging Puzzle Platformer Game | Wall-Jumping Adventure</title>
+    <meta name="description" content="Play Appel, an exciting platformer game where you navigate through 9 challenging levels using unique mechanics like wall-jumping and sticking. Collect golden apples and discover hidden giant red apples while mastering various movement techniques. Created by Griffpatch, the developer of Paper Minecraft and Geometry Dash 1.">
+    <meta name="keywords" content="Appel, Griffpatch, platformer, wall-jumping, level editor, Scratch game, golden apples, physics game">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://appel-game.top/game2.html">
+    <meta property="og:title" content="Appel - A Challenging Puzzle Platformer Game">
+    <meta property="og:description" content="Master wall-jumping mechanics and collect golden apples in this exciting platformer game. Create and share your own levels!">
+    <meta property="og:image" content="https://appel-game.top/images/appel-og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://appel-game.top/game2.html">
+    <meta property="twitter:title" content="Appel - A Challenging Puzzle Platformer Game">
+    <meta property="twitter:description" content="Master wall-jumping mechanics and collect golden apples in this exciting platformer game. Create and share your own levels!">
+    <meta property="twitter:image" content="https://appel-game.top/images/appel-og-image.jpg">
+
+    <!-- Alternate Language Versions -->
+    <link rel="alternate" hreflang="en" href="https://appel-game.top/game2.html">
+    <link rel="alternate" hreflang="zh" href="https://appel-game.top/game2-zh.html">
+    <link rel="alternate" hreflang="ja" href="https://appel-game.top/game2-jp.html">
+    <link rel="alternate" hreflang="ko" href="https://appel-game.top/game2-kr.html">
+    <link rel="canonical" href="https://appel-game.top/game2.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" as="style">
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" as="script">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF0000',
+                        secondary: '#FFD700',
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+    </style>
+</head>
+
+<body x-data="{}" class="bg-gradient-to-r from-red-50 via-white to-yellow-50">
+    <!-- Navigation -->
+    <section class="relative top-0 left-0 right-0 z-[1000] bg-white/50 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">
+                        Appel
+                    </h1>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-red-500 transition-colors">Home</a>
+                    <a href="#how-to-play" class="text-gray-600 hover:text-red-500 transition-colors">How to Play</a>
+                    <a href="#level-editor" class="text-gray-600 hover:text-red-500 transition-colors">Level Editor</a>
+                    <a href="#faq" class="text-gray-600 hover:text-red-500 transition-colors">FAQ</a>
+                    <a href="#about" class="text-gray-600 hover:text-red-500 transition-colors">About</a>
+                </nav>
+
+                <!-- Language Selector -->
+                <div class="relative" x-data="{ open: false }">
+                    <button @click="open = !open" class="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors duration-300">
+                        <span>🌐</span>
+                        <span>English</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-50">
+                        <a href="game2.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-semibold bg-gray-50">English</a>
+                        <a href="game2-zh.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">中文</a>
+                        <a href="game2-jp.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">日本語</a>
+                        <a href="game2-kr.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">한국어</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="space-y-6">
+                    <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">
+                        Welcome to Appel
+                    </h1>
+                    <p class="text-xl md:text-lg text-gray-600">
+                        Embark on an exciting platforming adventure across 9 unique levels. Master wall-jumping, collect golden apples, and discover hidden secrets in this creative Scratch project by Griffpatch!
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">🍎</span>
+                            <p class="text-gray-600">9 Unique Levels</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">🎮</span>
+                            <p class="text-gray-600">Custom Level Editor</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">⭐</span>
+                            <p class="text-gray-600">Collectible Challenges</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Content - YouTube Video -->
+                <div class="aspect-video rounded-xl overflow-hidden shadow-lg">
+                    <iframe 
+                        width="100%" 
+                        height="100%" 
+                        src="https://www.youtube.com/embed/gqcc0IyBaFg" 
+                        title="Appel Gameplay Video"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Game Section -->
+    <section id="play" class="py-8 bg-white/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">Play Appel</h2>
+            <div class="aspect-[16/9] w-full rounded-xl overflow-hidden shadow-2xl border-4 border-red-500/20">
+                <iframe src="https://www.crazygames.com/embed/appel" style="width: 100%; height: 100%;" frameborder="0" allow="gamepad *;"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Play Section -->
+    <section id="how-to-play" class="py-16 bg-white/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">How to Play</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Basic Controls -->
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Basic Controls</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center space-x-2">
+                            <span class="text-red-500">→</span>
+                            <span>Use WASD or Arrow Keys to move and jump</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-red-500">↓</span>
+                            <span>Hold S or Down Arrow to duck through tight spaces</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-red-500">↔</span>
+                            <span>Jump into walls and hold direction keys to stick</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Advanced Controls -->
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Advanced Techniques</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center space-x-2">
+                            <span class="text-yellow-500">↑</span>
+                            <span>Wall Jump: Touch wall + Press Up Arrow</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-yellow-500">⇈</span>
+                            <span>Higher Jump: Hold Up Arrow</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-yellow-500">⇅</span>
+                            <span>Ceiling Stick: Hold Up Arrow</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Q&A Section -->
+    <section class="py-16 bg-gradient-to-b from-white/80 to-white/40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- FAQ Header -->
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-red-500 to-yellow-500 text-transparent bg-clip-text">
+                    Questions & Answers
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Get to know everything about Appel, from basic controls to advanced gameplay mechanics
+                </p>
+            </div>
+
+            <!-- Basic Information -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        What type of game is Appel?
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        Appel is a platformer game where players jump, stick to walls, and navigate through levels to collect golden apples and reach the end.
+                    </p>
+                </div>
+
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        Who created the Appel game?
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        Appel was created by Griffpatch, a well-known Scratch developer who also made games like Paper Minecraft and Geometry Dash.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Gameplay -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        What are the basic controls in Appel?
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        Use WASD or arrow keys to move and jump. Press S or the down arrow key to crouch, and hold the up arrow key for higher jumps.
+                    </p>
+                </div>
+
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        How does the wall-sticking mechanic work?
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        When jumping toward a wall, hold the left or right direction key to stick to it. You can then jump off the wall or stick to ceilings by holding the up arrow key.
+                    </p>
+                </div>
+
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        What collectibles are in the game?
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        Each level contains golden apples to collect, as well as a hidden giant red apple in every stage.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Game Features -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        What are the main mechanics in Appel?
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        The game includes wall-jumping, crouching to pass through tight spaces, collecting apples, and avoiding spikes and other hazards.
+                    </p>
+                </div>
+
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        How many levels are there in Appel?
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        There are 9 levels in total, each featuring unique platform designs, apple placements, and sometimes different color schemes.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Advanced Tips -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        How can you jump higher in the game?
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        Hold the up arrow key for a higher jump. You can also perform wall jumps by pressing up while sticking to a wall.
+                    </p>
+                </div>
+
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        How do you deal with enemies in Appel?
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        Jumping on enemies' heads is an effective way to eliminate them while avoiding damage.
+                    </p>
+                </div>
+
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        What unique level design elements are featured in Appel?
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        The game includes half-height blocks, rotating tiles, eye-like decorations that follow players, and various traps and obstacles.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Level Editor Section -->
+    <section id="level-editor" class="py-16 bg-gradient-to-r from-red-50 via-white to-yellow-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">Level Editor</h2>
+            
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Editor Controls</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center space-x-2">
+                                <span class="font-mono bg-gray-100 px-2 py-1 rounded">1-7</span>
+                                <span>Press to place tiles</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="font-mono bg-gray-100 px-2 py-1 rounded">R</span>
+                                <span>Rotate tiles</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="font-mono bg-gray-100 px-2 py-1 rounded">E</span>
+                                <span>Use eraser</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="font-mono bg-gray-100 px-2 py-1 rounded">M</span>
+                                <span>Test level</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="font-mono bg-gray-100 px-2 py-1 rounded">Q</span>
+                                <span>Return to edit mode</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">About Appel</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Created by Griffpatch</h3>
+                    <p class="text-gray-600 mb-4">
+                        Appel is a creative Scratch project by Griffpatch, the talented developer behind other popular games like Paper Minecraft and Geometry Dash 1.
+                    </p>
+                    <p class="text-gray-600">
+                        Licensed under Creative Commons Attribution Share-Alike license 2.0
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Game Features</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li>9 unique levels with progressive challenges</li>
+                        <li>Collect yellow apples throughout levels</li>
+                        <li>Find hidden giant red apples</li>
+                        <li>Create and share your own custom levels</li>
+                        <li>Master wall-jumping and sticking mechanics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white/80 py-12 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Footer Content Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Game Info -->
+                <div class="space-y-4">
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">
+                        Appel
+                    </h1>
+                    <p class="text-sm text-gray-600">
+                        A challenging platformer game where players navigate through levels, collect apples, and create their own adventures.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-semibold text-gray-900">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#how-to-play" class="text-sm text-gray-600 hover:text-red-500 transition-colors">How to Play</a>
+                        </li>
+                        <li>
+                            <a href="#level-editor" class="text-sm text-gray-600 hover:text-red-500 transition-colors">Level Editor</a>
+                        </li>
+                        <li>
+                            <a href="#faq" class="text-sm text-gray-600 hover:text-red-500 transition-colors">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-semibold text-gray-900">Legal</h4>
+                    <div class="flex flex-col space-y-2">
+                        <button @click="$refs.privacyModal.showModal()" class="text-left text-gray-600 hover:text-gray-700">
+                            Privacy Policy
+                        </button>
+                        <button @click="$refs.termsModal.showModal()" class="text-left text-gray-600 hover:text-gray-700">
+                            Terms of Use
+                        </button>
+                        <button @click="$refs.disclaimerModal.showModal()" class="text-left text-gray-600 hover:text-gray-700">
+                            Disclaimer
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-semibold text-gray-900">Follow Us</h4>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 hover:border-red-200 hover:bg-gradient-to-br hover:from-red-50 hover:to-yellow-50 transition-all duration-300 group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="text-gray-600 group-hover:text-red-500 transition-colors" viewBox="0 0 16 16">
+                                <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 hover:border-red-200 hover:bg-gradient-to-br hover:from-red-50 hover:to-yellow-50 transition-all duration-300 group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="text-gray-600 group-hover:text-red-500 transition-colors" viewBox="0 0 16 16">
+                                <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 hover:border-red-200 hover:bg-gradient-to-br hover:from-red-50 hover:to-yellow-50 transition-all duration-300 group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="text-gray-600 group-hover:text-red-500 transition-colors" viewBox="0 0 16 16">
+                                <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="pt-8 border-t border-gray-100">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <p class="text-sm text-gray-600">
+                        2024 Appel Game. Licensed under Creative Commons Attribution Share-Alike 2.0
+                    </p>
+                    <p class="text-sm text-gray-500">
+                        Created with by Griffpatch
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Privacy Policy Modal -->
+    <dialog x-ref="privacyModal" class="w-full max-w-2xl rounded-xl bg-white p-6 shadow-xl backdrop:bg-black/50">
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-gray-900">Privacy Policy</h3>
+                <button @click="$refs.privacyModal.close()" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="prose prose-sm max-w-none text-gray-600 space-y-4">
+                <p>Last updated: December 29, 2024</p>
+                
+                <h4 class="text-gray-900 font-medium">1. Information We Collect</h4>
+                <p>When you play Appel, we collect and process the following information:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Game progress data (completed levels, collected items, scores)</li>
+                    <li>Custom levels you create using the Level Editor</li>
+                    <li>Device information (browser type, operating system) for game compatibility</li>
+                    <li>Local storage data for saving game progress</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">2. How We Use Your Information</h4>
+                <p>We use the collected information for the following purposes:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>To save and restore your game progress</li>
+                    <li>To enable sharing of custom levels with other players (only when you choose to share)</li>
+                    <li>To analyze game performance and improve user experience</li>
+                    <li>To maintain and optimize game functionality</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">3. Data Storage and Security</h4>
+                <p>Your game data is primarily stored:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Locally on your device using browser storage</li>
+                    <li>Temporarily in memory while playing</li>
+                    <li>In our secure cloud storage if you choose to share custom levels</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">4. Your Rights</h4>
+                <p>You have the right to:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Access your stored game data</li>
+                    <li>Delete your custom levels and progress</li>
+                    <li>Opt-out of data collection (note: this may limit game functionality)</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">5. Third-Party Services</h4>
+                <p>We use limited third-party services for:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Game analytics to improve performance</li>
+                    <li>Cloud storage for shared custom levels</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">6. Contact Us</h4>
+                <p>For any privacy-related questions or concerns, please contact us through our social media channels or community forums.</p>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Terms of Use Modal -->
+    <dialog x-ref="termsModal" class="w-full max-w-2xl rounded-xl bg-white p-6 shadow-xl backdrop:bg-black/50">
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-gray-900">Terms of Use</h3>
+                <button @click="$refs.termsModal.close()" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="prose prose-sm max-w-none text-gray-600 space-y-4">
+                <p>Last updated: December 29, 2024</p>
+
+                <h4 class="text-gray-900 font-medium">1. Acceptance of Terms</h4>
+                <p>By accessing and playing Appel, you agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use the game.</p>
+
+                <h4 class="text-gray-900 font-medium">2. License and Game Usage</h4>
+                <p>Appel grants you a personal, non-exclusive, non-transferable license to:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Play the game for personal entertainment</li>
+                    <li>Create and share custom levels using the Level Editor</li>
+                    <li>Share gameplay recordings and screenshots</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">3. User Conduct</h4>
+                <p>When using Appel, you agree not to:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Modify, reverse engineer, or hack the game</li>
+                    <li>Create inappropriate or offensive content in custom levels</li>
+                    <li>Use cheats, automation software, or exploits</li>
+                    <li>Share or distribute the game without permission</li>
+                    <li>Violate any applicable laws or regulations</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">4. Intellectual Property</h4>
+                <p>The following elements are protected by copyright and other IP rights:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Game graphics, animations, and visual elements</li>
+                    <li>Sound effects and music</li>
+                    <li>Game code and mechanics</li>
+                    <li>The Appel name and logo</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">5. User-Generated Content</h4>
+                <p>For custom levels you create:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>You retain ownership of your original content</li>
+                    <li>You grant us permission to host and share your levels</li>
+                    <li>We may remove content that violates our guidelines</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">6. Account Termination</h4>
+                <p>We reserve the right to terminate or suspend access to the game for:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Violation of these terms</li>
+                    <li>Creating inappropriate content</li>
+                    <li>Cheating or exploiting game mechanics</li>
+                </ul>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Disclaimer Modal -->
+    <dialog x-ref="disclaimerModal" class="w-full max-w-2xl rounded-xl bg-white p-6 shadow-xl backdrop:bg-black/50">
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-gray-900">Disclaimer</h3>
+                <button @click="$refs.disclaimerModal.close()" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="prose prose-sm max-w-none text-gray-600 space-y-4">
+                <p>Last updated: December 29, 2024</p>
+
+                <h4 class="text-gray-900 font-medium">1. General Disclaimer</h4>
+                <p>Appel is provided "as is" and "as available" without any warranties of any kind. We do not guarantee that:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>The game will be error-free or uninterrupted</li>
+                    <li>Bugs or issues will be corrected immediately</li>
+                    <li>The game will be compatible with all devices and browsers</li>
+                    <li>Your game progress will be saved in all circumstances</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">2. User-Generated Content Disclaimer</h4>
+                <p>Regarding custom levels and user content:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>We do not review all user-created content</li>
+                    <li>We are not responsible for the content of custom levels</li>
+                    <li>Players use the Level Editor at their own risk</li>
+                    <li>We may remove content without prior notice</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">3. Technical Requirements</h4>
+                <p>Players are responsible for:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Meeting minimum system requirements</li>
+                    <li>Maintaining a stable internet connection</li>
+                    <li>Keeping their browser and plugins updated</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">4. Limitation of Liability</h4>
+                <p>We are not liable for any damages arising from:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Use or inability to use the game</li>
+                    <li>Loss of game progress or custom levels</li>
+                    <li>Technical issues or server downtime</li>
+                    <li>Actions of other users or third parties</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">5. External Links</h4>
+                <p>The game may contain links to external websites or resources. We:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Do not endorse these external sources</li>
+                    <li>Are not responsible for their content or availability</li>
+                    <li>Recommend reviewing their separate terms and policies</li>
+                </ul>
+            </div>
+        </div>
+    </dialog>
+</body>
+
+</html>

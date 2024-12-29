@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appel - 도전적인 퍼즐 플랫포머 게임 | 벽 점프 어드벤처</title>
+    <meta name="description" content="Appel에서 벽 점프와 달라붙기 같은 독특한 메카닉을 사용하여 9개의 도전적인 레벨을 탐험하는 흥미진진한 플랫포머 게임을 즐겨보세요. 황금 사과를 수집하고 숨겨진 거대한 빨간 사과를 발견하며 다양한 이동 기술을 마스터하세요. Paper Minecraft와 Geometry Dash 1의 개발자 Griffpatch가 제작했습니다.">
+    <meta name="keywords" content="Appel, Griffpatch, 플랫포머, 벽 점프, 레벨 에디터, 스크래치 게임, 황금 사과, 물리 게임">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://appel-game.top/game2-kr.html">
+    <meta property="og:title" content="Appel - 도전적인 퍼즐 플랫포머 게임">
+    <meta property="og:description" content="벽 점프 메카닉을 마스터하고 황금 사과를 수집하는 흥미진진한 플랫포머 게임입니다. 자신만의 레벨을 만들고 공유해보세요!">
+    <meta property="og:image" content="https://appel-game.top/images/appel-og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://appel-game.top/game2-kr.html">
+    <meta property="twitter:title" content="Appel - 도전적인 퍼즐 플랫포머 게임">
+    <meta property="twitter:description" content="벽 점프 메카닉을 마스터하고 황금 사과를 수집하는 흥미진진한 플랫포머 게임입니다. 자신만의 레벨을 만들고 공유해보세요!">
+    <meta property="twitter:image" content="https://appel-game.top/images/appel-og-image.jpg">
+
+    <!-- Alternate Language Versions -->
+    <link rel="alternate" hreflang="en" href="https://appel-game.top/game2.html">
+    <link rel="alternate" hreflang="zh" href="https://appel-game.top/game2-zh.html">
+    <link rel="alternate" hreflang="ja" href="https://appel-game.top/game2-jp.html">
+    <link rel="alternate" hreflang="ko" href="https://appel-game.top/game2-kr.html">
+    <link rel="canonical" href="https://appel-game.top/game2-kr.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" as="style">
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" as="script">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF0000',
+                        secondary: '#FFD700',
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+    </style>
+</head>
+
+<body x-data="{}" class="bg-gradient-to-r from-red-50 via-white to-yellow-50">
+    <!-- Navigation -->
+    <section class="relative top-0 left-0 right-0 z-[1000] bg-white/50 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">
+                        Appel
+                    </h1>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#game-intro" class="text-gray-600 hover:text-red-500 transition-colors">게임 소개</a>
+                    <a href="#how-to-play" class="text-gray-600 hover:text-red-500 transition-colors">게임 방법</a>
+                    <a href="#level-editor" class="text-gray-600 hover:text-red-500 transition-colors">레벨 에디터</a>
+                    <a href="#faq" class="text-gray-600 hover:text-red-500 transition-colors">자주 묻는 질문</a>
+                    <a href="#about" class="text-gray-600 hover:text-red-500 transition-colors">소개</a>
+                </nav>
+
+                <!-- Language Selector -->
+                <div class="relative" x-data="{ open: false }">
+                    <button @click="open = !open" class="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors duration-300">
+                        <span>🌐</span>
+                        <span>한국어</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-50">
+                        <a href="https://appel-game.top/game2.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">English</a>
+                        <a href="https://appel-game.top/game2-zh.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">中文</a>
+                        <a href="https://appel-game.top/game2-jp.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">日本語</a>
+                        <a href="https://appel-game.top/game2-kr.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-semibold bg-gray-50">한국어</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="space-y-6">
+                    <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">
+                        Appel에 오신 것을 환영합니다
+                    </h1>
+                    <p class="text-xl md:text-lg text-gray-600">
+                        9개의 독특한 레벨을 통해 흥미진진한 플랫포밍 어드벤처를 시작하세요. 벽 점프를 마스터하고, 황금 사과를 수집하며, Griffpatch가 제작한 이 창의적인 스크래치 프로젝트에서 숨겨진 비밀을 발견하세요!
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">🍎</span>
+                            <p class="text-gray-600">9개의 독특한 레벨</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">🎮</span>
+                            <p class="text-gray-600">커스텀 레벨 에디터</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">⭐</span>
+                            <p class="text-gray-600">수집 챌린지</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Content - YouTube Video -->
+                <div class="aspect-video rounded-xl overflow-hidden shadow-lg">
+                    <iframe 
+                        width="100%" 
+                        height="100%" 
+                        src="https://www.youtube.com/embed/gqcc0IyBaFg" 
+                        title="Appel Gameplay Video"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Game Section -->
+    <section id="play" class="py-8 bg-white/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">Play Appel</h2>
+            <div class="aspect-[16/9] w-full rounded-xl overflow-hidden shadow-2xl border-4 border-red-500/20">
+                <iframe src="https://www.crazygames.com/embed/appel" style="width: 100%; height: 100%;" frameborder="0" allow="gamepad *;"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Play Section -->
+    <section id="how-to-play" class="py-16 bg-white/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">
+                게임 방법
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Basic Controls -->
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">기본 조작</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center space-x-2">
+                            <span class="text-red-500">→</span>
+                            <span>WASD 키 또는 방향키로 이동 및 점프</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-red-500">↓</span>
+                            <span>S키 또는 아래 방향키로 웅크리기</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-red-500">↔</span>
+                            <span>벽에 점프하고 방향키를 누르고 있으면 벽에 달라붙기</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Advanced Controls -->
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">고급 기술</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center space-x-2">
+                            <span class="text-yellow-500">↑</span>
+                            <span>벽 점프: 벽에 닿은 상태에서 위 방향키 누르기</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-yellow-500">⇈</span>
+                            <span>높이 점프: 위 방향키 길게 누르기</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-yellow-500">⇅</span>
+                            <span>천장에 달라붙기: 위 방향키 길게 누르기</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Q&A Section -->
+    <section class="py-16 bg-gradient-to-b from-white/80 to-white/40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- FAQ Header -->
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-red-500 to-yellow-500 text-transparent bg-clip-text">
+                    자주 묻는 질문
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Appel에 대해 자주 묻는 질문들을 모았습니다.
+                </p>
+            </div>
+
+            <!-- Basic Information -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <!-- Game Info -->
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        Appel의 기본 조작법은 무엇인가요?
+                    </h3>
+                    <p class="relative text-gray-600">
+                        WASD 키나 방향키를 사용하여 이동하고 점프할 수 있습니다. 벽에 닿으면 자동으로 달라붙으며, 위 방향키를 누르면 벽 점프를 할 수 있습니다.
+                    </p>
+                </div>
+
+                <!-- Game Features -->
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        게임에서 더 높이 점프하려면 어떻게 해야 하나요?
+                    </h3>
+                    <p class="relative text-gray-600">
+                        위 방향키를 길게 누르면 더 높이 점프할 수 있습니다. 또한 벽 점프를 활용하면 더 높은 곳에 도달할 수 있습니다.
+                    </p>
+                </div>
+
+                <!-- Level Editor -->
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        황금 사과는 어떻게 수집하나요?
+                    </h3>
+                    <p class="relative text-gray-600">
+                        황금 사과는 각 레벨에 숨겨져 있습니다. 벽 점프와 달라붙기 기술을 활용하여 도달할 수 있는 곳을 탐험해보세요.
+                    </p>
+                </div>
+
+                <!-- Custom Levels -->
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        커스텀 레벨을 만들 수 있나요?
+                    </h3>
+                    <p class="relative text-gray-600">
+                        네! 레벨 에디터를 사용하여 자신만의 레벨을 만들고 공유할 수 있습니다. 다양한 블록과 장애물을 배치하여 창의적인 레벨을 디자인해보세요.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Level Editor Section -->
+    <section id="level-editor" class="py-16 bg-gradient-to-r from-red-50 via-white to-yellow-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-red-500 to-yellow-500 text-transparent bg-clip-text">
+                    레벨 에디터
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    자신만의 독특한 레벨을 만들고 공유하세요. 블록을 배치하고, 장애물을 설정하고, 사과를 숨기세요.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Editor Features -->
+                <div class="bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6">
+                    <div class="text-center mb-6">
+                        <span class="text-3xl">🎨</span>
+                        <h3 class="text-xl font-semibold mt-4 mb-2">직관적인 디자인</h3>
+                        <p class="text-gray-600">
+                            간단한 드래그 앤 드롭으로 레벨을 디자인하세요. 블록을 배치하고 장애물을 설정하는 것이 매우 쉽습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Sharing -->
+                <div class="bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6">
+                    <div class="text-center mb-6">
+                        <span class="text-3xl">🌐</span>
+                        <h3 class="text-xl font-semibold mt-4 mb-2">레벨 공유</h3>
+                        <p class="text-gray-600">
+                            만든 레벨을 전 세계 플레이어들과 공유하세요. 다른 플레이어의 레벨도 플레이할 수 있습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Testing -->
+                <div class="bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6">
+                    <div class="text-center mb-6">
+                        <span class="text-3xl">🎮</span>
+                        <h3 class="text-xl font-semibold mt-4 mb-2">실시간 테스트</h3>
+                        <p class="text-gray-600">
+                            만든 레벨을 바로 테스트해보세요. 플레이하면서 레벨을 수정하고 완성도를 높일 수 있습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-red-500 to-yellow-500 hover:from-red-600 hover:to-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-300">
+                    레벨 에디터 시작하기
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">About Appel</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Created by Griffpatch</h3>
+                    <p class="text-gray-600 mb-4">
+                        Appel is a creative Scratch project by Griffpatch, the talented developer behind other popular games like Paper Minecraft and Geometry Dash 1.
+                    </p>
+                    <p class="text-gray-600">
+                        Licensed under Creative Commons Attribution Share-Alike license 2.0
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Game Features</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li>9 unique levels with progressive challenges</li>
+                        <li>Collect yellow apples throughout levels</li>
+                        <li>Find hidden giant red apples</li>
+                        <li>Create and share your own custom levels</li>
+                        <li>Master wall-jumping and sticking mechanics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- About -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase mb-4">
+                        Appel 소개
+                    </h3>
+                    <p class="text-base text-gray-500">
+                        도전적이고 재미있는 플랫포머 게임을 만들기 위해 노력하고 있습니다.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase mb-4">
+                        빠른 링크
+                    </h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="#game-intro" class="text-base text-gray-500 hover:text-gray-900">
+                                게임 소개
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#how-to-play" class="text-base text-gray-500 hover:text-gray-900">
+                                게임 방법
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#level-editor" class="text-base text-gray-500 hover:text-gray-900">
+                                레벨 에디터
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase mb-4">
+                        법적 고지
+                    </h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+                                개인정보 처리방침
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+                                이용약관
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Social -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase mb-4">
+                        소셜 미디어
+                    </h3>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <span class="sr-only">Twitter</span>
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <span class="sr-only">GitHub</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between">
+                <div class="flex space-x-6 md:order-2">
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        개인정보 처리방침
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-500">
+                        이용약관
+                    </a>
+                </div>
+                <p class="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
+                    &copy; 2024 Appel. 모든 권리 보유.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Privacy Policy Modal -->
+    <dialog x-ref="privacyModal" class="w-full max-w-2xl rounded-xl bg-white p-6 shadow-xl backdrop:bg-black/50">
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-gray-900">개인정보 처리방침</h3>
+                <button @click="$refs.privacyModal.close()" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="prose prose-sm max-w-none text-gray-600 space-y-4">
+                <p>Last updated: December 29, 2024</p>
+                
+                <h4 class="text-gray-900 font-medium">1. 정보 수집</h4>
+                <p>Appel을 사용할 때, 다음 정보를 수집 및 처리합니다:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>게임 진행 데이터 (완료된 레벨, 수집된 아이템, 점수)</li>
+                    <li>레벨 에디터를 사용하여 만든 사용자 정의 레벨</li>
+                    <li>장치 정보 (브라우저 유형, 운영 체제) 게임 호환성을 위해</li>
+                    <li>로컬 저장소 데이터 게임 진행을 저장하기 위해</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">2. 정보 사용</h4>
+                <p>수집된 정보를 다음 목적으로 사용합니다:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>게임 진행을 저장하고 복원하기 위해</li>
+                    <li>사용자가 공유하기로 선택한 경우 사용자 정의 레벨을 공유하기 위해</li>
+                    <li>게임 성능을 분석하고 사용자 경험을 개선하기 위해</li>
+                    <li>게임 기능을 유지하고 최적화하기 위해</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">3. 데이터 저장 및 보안</h4>
+                <p>게임 데이터는 주로 다음 위치에 저장됩니다:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>로컬 저장소에 저장 (브라우저 저장소)</li>
+                    <li>임시로 메모리에 저장 (게임 진행 중)</li>
+                    <li>사용자가 공유하기로 선택한 경우 안전한 클라우드 저장소에 저장</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">4. 사용자 권리</h4>
+                <p>사용자는 다음 권리를 가지고 있습니다:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>저장된 게임 데이터에 접근하기</li>
+                    <li>사용자 정의 레벨과 진행을 삭제하기</li>
+                    <li>데이터 수집을 거부하기 (이 경우 게임 기능이 제한될 수 있음)</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">5. 제3자 서비스</h4>
+                <p>다음 제3자 서비스를 사용합니다:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>게임 성능을 개선하기 위한 게임 분석</li>
+                    <li>공유된 사용자 정의 레벨을 저장하기 위한 클라우드 저장소</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">6. 연락처</h4>
+                <p>개인정보 처리방침과 관련된 질문이나 우려 사항이 있는 경우, 社交媒体 채널이나 커뮤니티 포럼을 통해 연락해 주세요.</p>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Terms of Use Modal -->
+    <dialog x-ref="termsModal" class="w-full max-w-2xl rounded-xl bg-white p-6 shadow-xl backdrop:bg-black/50">
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-gray-900">이용약관</h3>
+                <button @click="$refs.termsModal.close()" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="prose prose-sm max-w-none text-gray-600 space-y-4">
+                <p>Last updated: December 29, 2024</p>
+
+                <h4 class="text-gray-900 font-medium">1. 약관 동의</h4>
+                <p>Appel에 접근하고 사용함으로써, 이 약관에 동의하는 것으로 간주합니다. 이 약관에 동의하지 않는 경우, 게임을 사용하지 마십시오.</p>
+
+                <h4 class="text-gray-900 font-medium">2. 라이선스 및 게임 사용</h4>
+                <p>Appel은 개인적인 용도로 다음을 허용합니다:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>게임을 즐기기</li>
+                    <li>레벨 에디터를 사용하여 사용자 정의 레벨을 만들고 공유하기</li>
+                    <li>게임 플레이 기록과 스크린샷을 공유하기</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">3. 사용자 행동</h4>
+                <p>Appel을 사용할 때, 다음을 하지 마십시오:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>게임을 수정하거나 해킹하기</li>
+                    <li>부적절하거나 공격적인 콘텐츠를 사용자 정의 레벨에 포함시키기</li>
+                    <li>치트, 자동화 소프트웨어 또는 익스플로잇을 사용하기</li>
+                    <li>게임을 허가 없이 공유하거나 배포하기</li>
+                    <li>적용 가능한 법률이나 규정을 위반하기</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">4. 지적 재산권</h4>
+                <p>다음 요소는 저작권 및 기타 지적 재산권으로 보호됩니다:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>게임 그래픽, 애니메이션 및 시각적 요소</li>
+                    <li>사운드 이펙트 및 음악</li>
+                    <li>게임 코드 및 메커니즘</li>
+                    <li>Appel 이름 및 로고</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">5. 사용자 생성 콘텐츠</h4>
+                <p>사용자 정의 레벨 및 사용자 콘텐츠에 대해:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>모든 사용자 생성 콘텐츠를 검토하지 않습니다</li>
+                    <li>사용자 정의 레벨의 콘텐츠에 대해 책임을 지지 않습니다</li>
+                    <li>사용자는 레벨 에디터를 사용할 때 자신의 책임하에 사용합니다</li>
+                    <li>콘텐츠를 사전 통보 없이 삭제할 수 있습니다</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">6. 계정 종료</h4>
+                <p>다음 경우에 게임 접근을 종료하거나 중단할 수 있습니다:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>이 약관을 위반한 경우</li>
+                    <li>부적절한 콘텐츠를 생성한 경우</li>
+                    <li>치트 또는 익스플로잇을 사용한 경우</li>
+                </ul>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Disclaimer Modal -->
+    <dialog x-ref="disclaimerModal" class="w-full max-w-2xl rounded-xl bg-white p-6 shadow-xl backdrop:bg-black/50">
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-gray-900">면책조항</h3>
+                <button @click="$refs.disclaimerModal.close()" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="prose prose-sm max-w-none text-gray-600 space-y-4">
+                <p>Last updated: December 29, 2024</p>
+
+                <h4 class="text-gray-900 font-medium">1. 일반적인 면책조항</h4>
+                <p>Appel은 "있는 그대로" 및 "사용 가능한 그대로" 제공되며, 어떠한 보증도 제공되지 않습니다. 우리는:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>게임이 오류가 없거나 중단되지 않을 것이라는 보증을 하지 않습니다</li>
+                    <li>버그나 문제가 즉시 수정될 것이라는 보증을 하지 않습니다</li>
+                    <li>게임이 모든 장치와 브라우저와 호환될 것이라는 보증을 하지 않습니다</li>
+                    <li>게임 진행이 모든 상황에서 저장될 것이라는 보증을 하지 않습니다</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">2. 사용자 생성 콘텐츠에 대한 면책조항</h4>
+                <p>사용자 정의 레벨 및 사용자 콘텐츠에 대해:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>모든 사용자 생성 콘텐츠를 검토하지 않습니다</li>
+                    <li>사용자 정의 레벨의 콘텐츠에 대해 책임을 지지 않습니다</li>
+                    <li>사용자는 레벨 에디터를 사용할 때 자신의 책임하에 사용합니다</li>
+                    <li>콘텐츠를 사전 통보 없이 삭제할 수 있습니다</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">3. 기술 요구 사항</h4>
+                <p>사용자는:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>최소 시스템 요구 사항을 충족해야 합니다</li>
+                    <li>안정적인 인터넷 연결을 유지해야 합니다</li>
+                    <li>브라우저와 플러그인을 최신 버전으로 유지해야 합니다</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">4. 책임의 한계</h4>
+                <p>다음 경우에 책임을 지지 않습니다:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>게임 사용 또는 사용할 수 없는 경우</li>
+                    <li>게임 진행이나 사용자 정의 레벨의 손실</li>
+                    <li>기술적인 문제 또는 서버 다운타임</li>
+                    <li>다른 사용자 또는 제3자의 행동</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">5. 외부 링크</h4>
+                <p>게임에는 외부 웹사이트나 리소스에 대한 링크가 포함될 수 있습니다. 우리는:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>이러한 외부 소스를 보증하지 않습니다</li>
+                    <li>콘텐츠나 가용성에 대해 책임을 지지 않습니다</li>
+                    <li>별도의 약관 및 정책을 검토하는 것을 권장합니다</li>
+                </ul>
+            </div>
+        </div>
+    </dialog>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+{
+    "name": "Appel Game",
+    "short_name": "Appel",
+    "description": "A challenging puzzle platformer game with unique wall-jumping mechanics",
+    "start_url": {
+        "en": "/game2.html",
+        "zh": "/game2-zh.html",
+        "ja": "/game2-jp.html",
+        "ko": "/game2-kr.html"
+    },
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ef4444",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

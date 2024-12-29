@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appel - 具有挑战性的平台解谜游戏 | 墙壁跳跃冒险</title>
+    <meta name="description" content="体验Appel，一款令人兴奋的平台游戏，通过独特的墙壁跳跃和附着机制，在9个充满挑战的关卡中展开冒险。收集金苹果，发现隐藏的巨型红苹果，同时掌握各种移动技巧。由Paper Minecraft和Geometry Dash 1的开发者Griffpatch制作。">
+    <meta name="keywords" content="Appel, Griffpatch, 平台游戏, 墙壁跳跃, 关卡编辑器, Scratch游戏, 金苹果, 物理游戏">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://appel-game.top/game2-zh.html">
+    <meta property="og:title" content="Appel - 具有挑战性的平台解谜游戏">
+    <meta property="og:description" content="掌握墙壁跳跃机制，在这款令人兴奋的平台游戏中收集金苹果。创建并分享您自己的关卡！">
+    <meta property="og:image" content="https://appel-game.top/images/appel-og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://appel-game.top/game2-zh.html">
+    <meta property="twitter:title" content="Appel - 具有挑战性的平台解谜游戏">
+    <meta property="twitter:description" content="掌握墙壁跳跃机制，在这款令人兴奋的平台游戏中收集金苹果。创建并分享您自己的关卡！">
+    <meta property="twitter:image" content="https://appel-game.top/images/appel-og-image.jpg">
+
+    <!-- Alternate Language Versions -->
+    <link rel="alternate" hreflang="en" href="https://appel-game.top/game2.html">
+    <link rel="alternate" hreflang="zh" href="https://appel-game.top/game2-zh.html">
+    <link rel="alternate" hreflang="ja" href="https://appel-game.top/game2-jp.html">
+    <link rel="alternate" hreflang="ko" href="https://appel-game.top/game2-kr.html">
+    <link rel="canonical" href="https://appel-game.top/game2-zh.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" as="style">
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" as="script">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF0000',
+                        secondary: '#FFD700',
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+    </style>
+</head>
+
+<body x-data="{}" class="bg-gradient-to-r from-red-50 via-white to-yellow-50">
+    <!-- Navigation -->
+    <section class="relative top-0 left-0 right-0 z-[1000] bg-white/50 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">
+                        Appel
+                    </h1>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-red-500 transition-colors">首页</a>
+                    <a href="#how-to-play" class="text-gray-600 hover:text-red-500 transition-colors">游戏指南</a>
+                    <a href="#level-editor" class="text-gray-600 hover:text-red-500 transition-colors">关卡编辑器</a>
+                    <a href="#faq" class="text-gray-600 hover:text-red-500 transition-colors">常见问题</a>
+                    <a href="#about" class="text-gray-600 hover:text-red-500 transition-colors">关于</a>
+                </nav>
+
+                <!-- Language Selector -->
+                <div class="relative" x-data="{ open: false }">
+                    <button @click="open = !open" class="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors duration-300">
+                        <span>🌐</span>
+                        <span>中文</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-50">
+                        <a href="game2.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">English</a>
+                        <a href="game2-zh.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-semibold bg-gray-50">中文</a>
+                        <a href="game2-jp.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">日本語</a>
+                        <a href="game2-kr.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">한국어</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="space-y-6">
+                    <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">
+                        欢迎来到 Appel
+                    </h1>
+                    <p class="text-xl md:text-lg text-gray-600">
+                        在9个独特关卡中展开令人兴奋的平台冒险。掌握墙壁跳跃技巧，收集金苹果，在这款由Griffpatch制作的创意Scratch项目中发现隐藏的秘密！
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">🍎</span>
+                            <p class="text-gray-600">9个独特关卡</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">🎮</span>
+                            <p class="text-gray-600">自定义关卡编辑器</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">⭐</span>
+                            <p class="text-gray-600">收集挑战</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Content - YouTube Video -->
+                <div class="aspect-video rounded-xl overflow-hidden shadow-lg">
+                    <iframe 
+                        width="100%" 
+                        height="100%" 
+                        src="https://www.youtube.com/embed/gqcc0IyBaFg" 
+                        title="Appel Gameplay Video"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Section -->
+    <section id="play" class="py-8 bg-white/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">开始游戏</h2>
+            <div class="aspect-[16/9] w-full rounded-xl overflow-hidden shadow-2xl border-4 border-red-500/20">
+                <iframe src="https://www.crazygames.com/embed/appel" style="width: 100%; height: 100%;" frameborder="0" allow="gamepad *;"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Play Section -->
+    <section id="how-to-play" class="py-16 bg-white/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">游戏指南</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Basic Controls -->
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">基本控制</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center space-x-2">
+                            <span class="text-red-500">→</span>
+                            <span>向右移动</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-red-500">←</span>
+                            <span>向左移动</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-red-500">空格键</span>
+                            <span>跳跃</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Advanced Controls -->
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">高级技巧</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center space-x-2">
+                            <span class="text-yellow-500">墙壁跳跃</span>
+                            <span>靠近墙壁时按跳跃键</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-yellow-500">连续跳跃</span>
+                            <span>掌握时机以实现更高跳跃</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="text-yellow-500">滑墙</span>
+                            <span>靠近墙壁缓慢下落</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Q&A Section -->
+    <section class="py-16 bg-gradient-to-b from-white/80 to-white/40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- FAQ Header -->
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-red-500 to-yellow-500 text-transparent bg-clip-text">
+                    常见问题解答
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    了解更多关于Appel的游戏玩法和功能
+                </p>
+            </div>
+
+            <!-- Basic Information -->
+            <div class="grid md:grid-cols-2 gap-6 mb-12">
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        游戏的基本控制是什么？
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        使用左右箭头键移动，空格键跳跃。靠近墙壁时可以进行墙壁跳跃。
+                    </p>
+                </div>
+
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        如何创建和分享自定义关卡？
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        使用关卡编辑器创建自定义关卡，然后分享给其他玩家。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Gameplay -->
+            <div class="grid md:grid-cols-2 gap-6 mb-12">
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        如何使用墙壁跳跃技巧？
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        靠近墙壁时按跳跃键即可进行墙壁跳跃。
+                    </p>
+                </div>
+
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        如何收集金苹果？
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        在关卡中找到并收集金苹果。
+                    </p>
+                </div>
+
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        如何发现隐藏的巨型红苹果？
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        在关卡中找到隐藏的巨型红苹果。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Game Features -->
+            <div class="grid md:grid-cols-2 gap-6 mb-12">
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        游戏的主要特点是什么？
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        游戏的主要特点包括墙壁跳跃、关卡编辑器和收集金苹果。
+                    </p>
+                </div>
+
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        游戏有多少个关卡？
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        游戏有9个关卡，每个关卡都有独特的挑战和机制。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Advanced Tips -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        如何提高跳跃高度？
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                       掌握时机以实现更高跳跃。
+                    </p>
+                </div>
+
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        如何处理敌人？
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        跳跃到敌人头上即可消灭他们。
+                    </p>
+                </div>
+
+                <div class="group relative bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 p-6 transition-all duration-300 hover:border-red-500 hover:shadow-lg hover:shadow-red-500/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <h3 class="relative text-[15px] font-medium text-gray-700 group-hover:text-red-500 transition-colors duration-300 mb-2">
+                        游戏中有哪些独特的关卡设计元素？
+                    </h3>
+                    <p class="relative text-sm text-gray-600 leading-relaxed">
+                        游戏中包括半高块、旋转方块、跟踪玩家的眼睛装饰以及各种陷阱和障碍。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Level Editor Section -->
+    <section id="level-editor" class="py-16 bg-gradient-to-r from-red-50 via-white to-yellow-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">关卡编辑器</h2>
+            
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">编辑器控制</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center space-x-2">
+                                <span class="font-mono bg-gray-100 px-2 py-1 rounded">1-7</span>
+                                <span>按键放置方块</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="font-mono bg-gray-100 px-2 py-1 rounded">R</span>
+                                <span>旋转方块</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="font-mono bg-gray-100 px-2 py-1 rounded">E</span>
+                                <span>使用橡皮擦</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="font-mono bg-gray-100 px-2 py-1 rounded">M</span>
+                                <span>测试关卡</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="font-mono bg-gray-100 px-2 py-1 rounded">Q</span>
+                                <span>返回编辑模式</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">关于Appel</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">由Griffpatch开发</h3>
+                    <p class="text-gray-600 mb-4">
+                        Appel是一款由Griffpatch开发的创意Scratch项目，Griffpatch也是Paper Minecraft和Geometry Dash 1的开发者。
+                    </p>
+                    <p class="text-gray-600">
+                        根据Creative Commons Attribution Share-Alike许可证2.0授权
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">游戏特点</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li>9个独特关卡，具有渐进式挑战</li>
+                        <li>收集金苹果和隐藏的巨型红苹果</li>
+                        <li>创建和分享自定义关卡</li>
+                        <li>掌握墙壁跳跃和附着机制</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white/80 py-12 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Footer Content Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Game Info -->
+                <div class="space-y-4">
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">
+                        Appel
+                    </h1>
+                    <p class="text-sm text-gray-600">
+                        一款具有挑战性的平台解谜游戏，提供独特的墙壁跳跃和附着机制。
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-semibold text-gray-900">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#how-to-play" class="text-sm text-gray-600 hover:text-red-500 transition-colors">游戏指南</a>
+                        </li>
+                        <li>
+                            <a href="#level-editor" class="text-sm text-gray-600 hover:text-red-500 transition-colors">关卡编辑器</a>
+                        </li>
+                        <li>
+                            <a href="#faq" class="text-sm text-gray-600 hover:text-red-500 transition-colors">常见问题</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-semibold text-gray-900">法律</h4>
+                    <div class="flex flex-col space-y-2">
+                        <button @click="$refs.privacyModal.showModal()" class="text-left text-gray-600 hover:text-gray-700">
+                            隐私政策
+                        </button>
+                        <button @click="$refs.termsModal.showModal()" class="text-left text-gray-600 hover:text-gray-700">
+                            使用条款
+                        </button>
+                        <button @click="$refs.disclaimerModal.showModal()" class="text-left text-gray-600 hover:text-gray-700">
+                            免责声明
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-semibold text-gray-900">关注我们</h4>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 hover:border-red-200 hover:bg-gradient-to-br hover:from-red-50 hover:to-yellow-50 transition-all duration-300 group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="text-gray-600 group-hover:text-red-500 transition-colors" viewBox="0 0 16 16">
+                                <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 hover:border-red-200 hover:bg-gradient-to-br hover:from-red-50 hover:to-yellow-50 transition-all duration-300 group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="text-gray-600 group-hover:text-red-500 transition-colors" viewBox="0 0 16 16">
+                                <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 hover:border-red-200 hover:bg-gradient-to-br hover:from-red-50 hover:to-yellow-50 transition-all duration-300 group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="text-gray-600 group-hover:text-red-500 transition-colors" viewBox="0 0 16 16">
+                                <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="pt-8 border-t border-gray-100">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <p class="text-sm text-gray-600">
+                        2024 Appel. 保留所有权利。
+                    </p>
+                    <p class="text-sm text-gray-500">
+                        由 Griffpatch 开发
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Privacy Policy Modal -->
+    <dialog x-ref="privacyModal" class="w-full max-w-2xl rounded-xl bg-white p-6 shadow-xl backdrop:bg-black/50">
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-gray-900">隐私政策</h3>
+                <button @click="$refs.privacyModal.close()" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="prose prose-sm max-w-none text-gray-600 space-y-4">
+                <p>最后更新：2024年12月29日</p>
+                
+                <h4 class="text-gray-900 font-medium">1. 我们收集的信息</h4>
+                <p>当您玩Appel时，我们会收集和处理以下信息：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>游戏进度数据（完成的关卡、收集的物品、分数）</li>
+                    <li>您使用关卡编辑器创建的自定义关卡</li>
+                    <li>设备信息（浏览器类型、操作系统）用于游戏兼容性</li>
+                    <li>本地存储数据用于保存游戏进度</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">2. 我们如何使用您的信息</h4>
+                <p>我们使用收集的信息用于以下目的：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>保存和恢复您的游戏进度</li>
+                    <li>启用自定义关卡的分享（仅当您选择分享时）</li>
+                    <li>分析游戏性能和改善用户体验</li>
+                    <li>维护和优化游戏功能</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">3. 数据存储和安全</h4>
+                <p>您的游戏数据主要存储：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>在您的设备上使用浏览器存储</li>
+                    <li>暂时存储在内存中</li>
+                    <li>在我们的安全云存储中（如果您选择分享自定义关卡）</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">4. 您的权利</h4>
+                <p>您有权：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>访问您的存储游戏数据</li>
+                    <li>删除您的自定义关卡和进度</li>
+                    <li>选择退出数据收集（请注意，这可能会限制游戏功能）</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">5. 第三方服务</h4>
+                <p>我们使用有限的第三方服务：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>游戏分析以改善性能</li>
+                    <li>云存储用于分享自定义关卡</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">6. 联系我们</h4>
+                <p>对于任何与隐私相关的问题或担忧，请通过我们的社交媒体渠道或社区论坛联系我们。</p>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Terms of Use Modal -->
+    <dialog x-ref="termsModal" class="w-full max-w-2xl rounded-xl bg-white p-6 shadow-xl backdrop:bg-black/50">
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-gray-900">使用条款</h3>
+                <button @click="$refs.termsModal.close()" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="prose prose-sm max-w-none text-gray-600 space-y-4">
+                <p>最后更新：2024年12月29日</p>
+
+                <h4 class="text-gray-900 font-medium">1. 接受条款</h4>
+                <p>通过访问和玩Appel，您同意受这些使用条款的约束。如果您不同意这些条款，请不要使用游戏。</p>
+
+                <h4 class="text-gray-900 font-medium">2. 许可和游戏使用</h4>
+                <p>Appel授予您个人、非独家、不可转让的许可：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>为个人娱乐目的玩游戏</li>
+                    <li>使用关卡编辑器创建和分享自定义关卡</li>
+                    <li>分享游戏录像和截图</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">3. 用户行为</h4>
+                <p>在使用Appel时，您同意不：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>修改、反向工程或破解游戏</li>
+                    <li>在自定义关卡中创建不适当或冒犯性的内容</li>
+                    <li>使用作弊、自动化软件或漏洞</li>
+                    <li>在未经许可的情况下分享或分发游戏</li>
+                    <li>违反任何适用的法律或法规</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">4. 知识产权</h4>
+                <p>以下元素受版权和其他知识产权保护：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>游戏图形、动画和视觉元素</li>
+                    <li>音效和音乐</li>
+                    <li>游戏代码和机制</li>
+                    <li>Appel名称和标志</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">5. 用户生成内容</h4>
+                <p>对于您创建的自定义关卡：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>您保留原始内容的所有权</li>
+                    <li>您授予我们托管和分享您的关卡的许可</li>
+                    <li>我们可能会删除违反我们的指南的内容</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">6. 账户终止</h4>
+                <p>我们保留终止或暂停访问游戏的权利：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>违反这些条款</li>
+                    <li>创建不适当的内容</li>
+                    <li>作弊或利用游戏机制</li>
+                </ul>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Disclaimer Modal -->
+    <dialog x-ref="disclaimerModal" class="w-full max-w-2xl rounded-xl bg-white p-6 shadow-xl backdrop:bg-black/50">
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-gray-900">免责声明</h3>
+                <button @click="$refs.disclaimerModal.close()" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="prose prose-sm max-w-none text-gray-600 space-y-4">
+                <p>最后更新：2024年12月29日</p>
+
+                <h4 class="text-gray-900 font-medium">1. 一般免责声明</h4>
+                <p>Appel以“原样”和“可用”提供，不提供任何形式的保证。我们不保证：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>游戏将是错误免费或不间断的</li>
+                    <li>错误或问题将立即得到纠正</li>
+                    <li>游戏将与所有设备和浏览器兼容</li>
+                    <li>您的游戏进度将在所有情况下保存</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">2. 用户生成内容免责声明</h4>
+                <p>关于自定义关卡和用户内容：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>我们不审查所有用户创建的内容</li>
+                    <li>我们不对自定义关卡的内容负责</li>
+                    <li>玩家使用关卡编辑器的风险自负</li>
+                    <li>我们可能会在不事先通知的情况下删除内容</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">3. 技术要求</h4>
+                <p>玩家负责：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>满足最低系统要求</li>
+                    <li>保持稳定的互联网连接</li>
+                    <li>保持浏览器和插件更新</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">4. 责任限制</h4>
+                <p>我们不对以下任何损害负责：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>使用或无法使用游戏</li>
+                    <li>游戏进度或自定义关卡的丢失</li>
+                    <li>技术问题或服务器停机</li>
+                    <li>其他用户或第三方的行为</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium">5. 外部链接</h4>
+                <p>游戏可能包含指向外部网站或资源的链接。我们：</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>不认可这些外部来源</li>
+                    <li>不对其内容或可用性负责</li>
+                    <li>建议查看其单独的条款和政策</li>
+                </ul>
+            </div>
+        </div>
+    </dialog>
+</body>
+</html>
