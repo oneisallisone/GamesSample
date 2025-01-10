@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>링크 모음</title>
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .card h3 {
+      margin-top: 0;
+    }
+    .card p {
+      color: #666;
+    }
+    .card a {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>링크 모음</h1>
+    <div id="links-container"></div>
+  </div>
+
+  <script>
+    fetch('links.json')
+      .then(response => response.json())
+      .then(data => {
+        const links = data.kr;
+        const container = document.getElementById('links-container');
+        
+        links.forEach(link => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          
+          card.innerHTML = `
+            <h3>${link.name}</h3>
+            <p>${link.description}</p>
+            <a href="${link.url}" target="_blank">사이트 방문</a>
+          `;
+          
+          container.appendChild(card);
+        });
+      });
+  </script>
+</body>
+</html>

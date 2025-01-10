@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Links</title>
+  <style>
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    #links-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .card h3 {
+      margin-top: 0;
+    }
+    .card p {
+      color: #666;
+    }
+    .card a {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Links</h1>
+    <div id="links-container"></div>
+  </div>
+
+  <script>
+    // Embedded JSON data
+    const linksData = {
+      "en": [
+        {
+          "name": "Lady Calculator",
+          "description": "Women's Health Calculator - Your Personal Health Assistant. LadyCalculator.top is an online calculator platform focused on women's health, providing comprehensive calculation tools from physiological health to pregnancy management, helping women better understand and take care of their bodies.",
+          "url": "https://ladycalculator.top/"
+        },
+        {
+          "name": "Profit Calculator",
+          "description": "Calculate your potential profits and risks in real-time",
+          "url": "https://profitcalculator.top/"
+        },
+        {
+          "name": "BG3 Mods Navigation",
+          "description": "Your comprehensive guide to Baldur's Gate 3 modifications, enhancing your gameplay experience with carefully curated mods.",
+          "url": "https://bg3mods.com/"
+        }
+      ],
+      "zh": [
+        {
+          "name": "女性计算器",
+          "description": "女性健康计算器 - 您的个人健康助手。LadyCalculator.top 是一个专注于女性健康的在线计算器平台，提供从生理健康到孕期管理的全面计算工具，帮助女性更好地了解和照顾自己的身体。",
+          "url": "https://ladycalculator.top/"
+        },
+        {
+          "name": "利润计算器",
+          "description": "实时计算您的潜在利润和风险",
+          "url": "https://profitcalculator.top/"
+        },
+        {
+          "name": "博德之门3 Mod导航",
+          "description": "博德之门3模组综合指南，通过精心挑选的模组提升您的游戏体验",
+          "url": "https://bg3mods.com/"
+        }
+      ],
+      "jp": [
+        {
+          "name": "レディー計算機",
+          "description": "女性の健康計算機 - あなたのパーソナルヘルスアシスタント。LadyCalculator.topは、女性の健康に焦点を当てたオンライン計算機プラットフォームで、生理的健康から妊娠管理までの包括的な計算ツールを提供し、女性が自分の体をよりよく理解し、ケアするのを助けます。",
+          "url": "https://ladycalculator.top/"
+        },
+        {
+          "name": "利益計算機",
+          "description": "潜在的な利益とリスクをリアルタイムで計算",
+          "url": "https://profitcalculator.top/"
+        },
+        {
+          "name": "BG3 Modナビゲーション",
+          "description": "バルダーズ・ゲート3のModの包括的なガイド。厳選されたModでゲーム体験を向上させます。",
+          "url": "https://bg3mods.com/"
+        }
+      ],
+      "kr": [
+        {
+          "name": "레이디 계산기",
+          "description": "여성 건강 계산기 - 개인 건강 도우미. LadyCalculator.top은 여성 건강에 초점을 맞춘 온라인 계산기 플랫폼으로, 생리 건강부터 임신 관리까지 포괄적인 계산 도구를 제공하여 여성이 자신의 몸을 더 잘 이해하고 돌볼 수 있도록 돕습니다.",
+          "url": "https://ladycalculator.top/"
+        },
+        {
+          "name": "수익 계산기",
+          "description": "실시간으로 잠재적 수익과 위험을 계산",
+          "url": "https://profitcalculator.top/"
+        },
+        {
+          "name": "BG3 모드 네비게이션",
+          "description": "발더스 게이트 3 모드의 종합 가이드. 신중하게 선별된 모드로 게임 플레이 경험을 향상시킵니다.",
+          "url": "https://bg3mods.com/"
+        }
+      ]
+    };
+
+    // Get page language from html tag
+    const pageLang = document.documentElement.lang || 'en';
+    const links = linksData[pageLang] || linksData.en;
+    const container = document.getElementById('links-container');
+    
+    if (links && links.length > 0) {
+      links.forEach(link => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        
+        card.innerHTML = `
+          <h3>${link.name}</h3>
+          <p>${link.description}</p>
+          <a href="${link.url}" target="_blank">${pageLang === 'zh' ? '访问网站' : 'Visit Site'}</a>
+        `;
+        
+        container.appendChild(card);
+      });
+    } else {
+      container.innerHTML = '<p>No links available</p>';
+    }
+  </script>
+</body>
+</html>
